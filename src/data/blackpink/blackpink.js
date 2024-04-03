@@ -34,4 +34,6 @@ export default {
     { id: 'rose', image: 'imagens/Rosé.jpg', },
 
   ],
+
+
 };

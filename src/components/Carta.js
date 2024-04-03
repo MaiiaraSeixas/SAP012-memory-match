@@ -13,21 +13,27 @@ const Carta = (objCarta) => {
   // Isso é útil para aplicar estilos CSS ao elemento ou para selecioná-lo posteriormente com JavaScript.
   // A propriedade 'className' é usada para obter ou definir o valor do atributo 'class' de um elemento.
   // Neste caso, estamos definindo o valor do atributo 'class' como 'App', o que significa que podemos usar '.App' em nosso CSS para selecionar este elemento e aplicar estilos a ele.
-  el.className = 'App';
+  // codigo comentado em OH
+  // el.className = 'App';
+
   // 'el.innerHTML' é uma propriedade que permite obter ou definir o conteúdo HTML de um elemento.
   // Aqui, estamos definindo o conteúdo HTML do elemento 'div' como uma string de template.
   // As strings de template são uma característica do ES6 (a versão 2015 do JavaScript) que permite a criação de strings complexas de maneira mais fácil.
   // As strings de template podem conter expressões - pedaços de código que são avaliados e cujo resultado é convertido em uma string.
   // Neste caso, as expressões são 'objCarta.image' e 'objCarta.name', que são propriedades do objeto passado como argumento para a função.
   // A string de template é interpretada e se torna o seguinte HTML:
-  // <div class="container-carta">
+  // <div class="card">
   //   <img src="valor de objCarta.image" alt="valor de objCarta.name" />
   // </div>
   // Este HTML é então definido como o conteúdo interno do elemento 'div'.
   // Isso significa que o elemento 'div' agora contém um elemento 'img' dentro de um elemento 'div' com a classe 'container-carta'.
-  el.innerHTML = `<div class="container-carta">
-    <img src="${objCarta.image}" alt="${objCarta.name}" />
+  el.innerHTML = `<div class="card">
+  <img src="${objCarta.image}" alt="${objCarta.name}" />
+  <img src="imagens/Fundo1.jpg" alt="cover" />
+
     </div>`;
+
+ 
   // A função retorna o elemento 'div' criado.
   // Isso significa que quando a função 'Carta' é chamada, ela retorna um elemento 'div' com uma classe 'App' e um conteúdo interno específico.
   // Este elemento 'div' pode então ser adicionado ao DOM em outro lugar do código.
