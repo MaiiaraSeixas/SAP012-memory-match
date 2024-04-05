@@ -27,15 +27,19 @@ body {
   position: absolute;
 }
 .card .cover {
-  background-image: url('C:\Users\Acer\Desktop\Laboratoria 3\SAP012-memory-match\src\imagens\Fundo1.jpg');
+  background-image: url('.\imagens\Fundo1.jpg');
   width: 160px;
   height: 160px;
   position: absolute;
   backface-visibility: hidden;
 }
-.card:hover img[alt="cover"] {
+
+.flip-card{
   transform: rotateY(180deg);
 }
+/* .card:hover img[alt="cover"] {
+  transform: rotateY(180deg);
+} */
 
 .card img[alt="cover"] {
   backface-visibility: hidden;
