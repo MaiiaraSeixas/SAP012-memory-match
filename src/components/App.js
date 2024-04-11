@@ -23,60 +23,67 @@ const App = () => {
 
   const el = document.createElement('div');
 
-   el.className = 'App';
+  el.className = 'App';
 
-  
+
   el.innerHTML = `<div class="container-inicio">
   <h1>BLACKPINK IN YOUR AREA</h1>
 
 </div>`;
 
   let listaCartas = data.items.concat(data.items); // Duplica as cartas aqui
-
   const cartasEmbaralhadas = listaCartas.sort((a, b) => 0.5 - Math.random())
   const mesa = document.createElement('div');
 
- mesa.className = 'grid';
+  mesa.className = 'grid';
   for (let carta of cartasEmbaralhadas) {
     mesa.appendChild(Carta(carta));
 
   }
+
   el.appendChild(mesa);
+  let cartasSelecionadas = [];
+  el.addEventListener("click", (event) => {
+    // Verifica se o elemento clicado é uma imagem e se menos de duas cartas foram selecionadas
+    if (event.target.tagName.toLowerCase() === 'img' && cartasSelecionadas.length <= 2) {
+      // Alterna a classe "flip-card" no elemento clicado
 
+      event.target.classList.add("flip-card");
+      // Adiciona o elemento clicado ao array 'cartasSelecionadas'
 
+      cartasSelecionadas.push(event.target);
+      // Verifica se duas cartas foram selecionadas
 
-// const cartaClicada = document.getElementById("root")
-// cartaClicada.addEventListener("click", Carta);
+      if (cartasSelecionadas.length === 2) {
+        // Obtém o atributo 'data-id' das duas cartas selecionadas
+        
+        const id1 = cartasSelecionadas[0].getAttribute("data-id");
+        const id2 = cartasSelecionadas[1].getAttribute("data-id");
+        // Verifica se os 'data-id' das duas cartas são iguais
 
-// Seleciona todas as cartas
+        if (id1 === id2) {
+          cartasSelecionadas = [];
+        } else {
+          // remove a classe "flip-card" das cartas
+          setTimeout(() => {
+          
+            cartasSelecionadas.forEach(carta => 
+              {
+                carta.classList.remove("flip-card")});
+                cartasSelecionadas = [];
+          },500)
 
-// let cartas = mesa.querySelectorAll('.carta');
+        }
 
-// cartas.forEach(carta => {
-//   carta.addEventListener('click', function(event) {
-
-//     Carta(event.target);
-//   });
-// });
-
-// const cartas = el.querySelectorAll('.card');
-
-//   cartas.forEach(carta => {
-//     carta.addEventListener('click', function(event) {
-//       this.classList.add('revelada');
-//     });
-//   });
-
-
-  // const rootElement = document.getElementById("root");
-  // rootElement.addEventListener("click", handleCartaClick);
-  // function handleCartaClick(event) {
-  //   const cartaClicada = event.target;
-
-  // }
+        
+      }
+    }
+  });
 
   return el;
 };
+
 export default App;
+
 // Função de combinar as cartas
 // Função de comparar  valores 
