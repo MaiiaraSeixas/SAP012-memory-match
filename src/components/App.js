@@ -1,19 +1,3 @@
-//
-// Para incluir los diferentes sets de cartas podemos _importar_ el archivo
-// JavasSript que contenga el `export` correspondiente...
-//
-// import pokemon from '../data/pokemon/pokemon.js';
-// console.log(pokemon);
-//
-// O alternativamente podríamos cargar el JSON de forma asíncrona usando
-// `fetch` en el momento que consideremos necesario.
-//
-// fetch('./data/pokemon/pokemon.json')
-//   .then(resp => resp.json())
-//   .then(console.log)
-//   .catch(console.error);
-//
-
 import Carta from "./Carta.js";
 
 import data from "../data/blackpink/blackpink.js";
@@ -30,8 +14,6 @@ const App = () => {
   <h1>BLACKPINK IN YOUR AREA</h1>
 
 </div>`;
- // Duplica as cartas aqui
-
   el.appendChild(iniciarJogo());
   el.innerHTML += `
   <div style="display: none;" id="restart">
@@ -41,11 +23,21 @@ const App = () => {
   const btnReniciar = el.querySelector("#restart");
   btnReniciar.addEventListener("click", () => {
     const mesa = document.querySelector(".grid");
-el.removeChild (mesa);
+    el.removeChild(mesa);
     el.appendChild(iniciarJogo());
     btnReniciar.style.display = 'none';
   })
   let cartasSelecionadas = [];
+
+const finalizarJogo = (cartasViradas) => {
+    
+
+    if (cartasViradas.length === 12) {
+      alert("Você é um Blink!");
+      btnReniciar.style.display = 'block';
+    }
+  }
+
   el.addEventListener("click", (event) => {
     // Verifica se o elemento clicado é uma imagem e se menos de duas cartas foram selecionadas
     if (event.target.tagName.toLowerCase() === 'img' && cartasSelecionadas.length <= 2) {
@@ -59,34 +51,28 @@ el.removeChild (mesa);
 
       if (cartasSelecionadas.length === 2) {
         // Obtém o atributo 'data-id' das duas cartas selecionadas
-        
+
         const id1 = cartasSelecionadas[0].getAttribute("data-id");
         const id2 = cartasSelecionadas[1].getAttribute("data-id");
         // Verifica se os 'data-id' das duas cartas são iguais
-const finalizarJogo = () => {
-  const desabilitarCartas = document.querySelectorAll(".flip-card");
-  if (desabilitarCartas.length === 12) {
-    alert("Você é um Blink!");
-    btnReniciar.style.display = 'block';
-  }
-}
+
         if (id1 === id2) {
           cartasSelecionadas = [];
-
-          finalizarJogo();
+const cartasViradas = document.querySelectorAll(".flip-card");
+          finalizarJogo(cartasViradas);
         } else {
           // remove a classe "flip-card" das cartas
           setTimeout(() => {
-          
-            cartasSelecionadas.forEach(carta => 
-              {
-                carta.classList.remove("flip-card")});
-                cartasSelecionadas = [];
-          },500)
+
+            cartasSelecionadas.forEach(carta => {
+              carta.classList.remove("flip-card")
+            });
+            cartasSelecionadas = [];
+          }, 500)
 
         }
 
-        
+
       }
     }
   });
@@ -99,13 +85,13 @@ const iniciarJogo = () => {
 
   mesa.className = 'grid';
   let listaCartas = data.items.concat(data.items);
-  const cartasEmbaralhadas = listaCartas.sort((a, b) => 0.5 - Math.random())
- 
+  const cartasEmbaralhadas = listaCartas.sort(() => 0.5 - Math.random())
+
   for (let carta of cartasEmbaralhadas) {
     mesa.appendChild(Carta(carta));
 
   }
-return mesa;
+  return mesa;
 }
 
 export default App;
