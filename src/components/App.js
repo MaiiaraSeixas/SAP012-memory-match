@@ -29,8 +29,8 @@ const App = () => {
   })
   let cartasSelecionadas = [];
 
-const finalizarJogo = (cartasViradas) => {
-    
+  const finalizarJogo = (cartasViradas) => {
+
 
     if (cartasViradas.length === 12) {
       alert("Você é um Blink!");
@@ -58,7 +58,7 @@ const finalizarJogo = (cartasViradas) => {
 
         if (id1 === id2) {
           cartasSelecionadas = [];
-const cartasViradas = document.querySelectorAll(".flip-card");
+          const cartasViradas = document.querySelectorAll(".flip-card");
           finalizarJogo(cartasViradas);
         } else {
           // remove a classe "flip-card" das cartas
