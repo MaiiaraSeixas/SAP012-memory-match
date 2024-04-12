@@ -16,7 +16,7 @@ const App = () => {
 </div>`;
   el.appendChild(iniciarJogo());
   el.innerHTML += `
-  <div style="display: none;" id="restart">
+  <div style="display: none;" id="restart" class="container-restart">
   <button type="button" > Jogar novamente!</button>
   </div>
   `;
