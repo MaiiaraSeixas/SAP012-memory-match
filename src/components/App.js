@@ -30,18 +30,21 @@ const App = () => {
   <h1>BLACKPINK IN YOUR AREA</h1>
 
 </div>`;
+ // Duplica as cartas aqui
 
-  let listaCartas = data.items.concat(data.items); // Duplica as cartas aqui
-  const cartasEmbaralhadas = listaCartas.sort((a, b) => 0.5 - Math.random())
-  const mesa = document.createElement('div');
-
-  mesa.className = 'grid';
-  for (let carta of cartasEmbaralhadas) {
-    mesa.appendChild(Carta(carta));
-
-  }
-
-  el.appendChild(mesa);
+  el.appendChild(iniciarJogo());
+  el.innerHTML += `
+  <div style="display: none;" id="restart">
+  <button type="button" > Jogar novamente!</button>
+  </div>
+  `;
+  const btnReniciar = el.querySelector("#restart");
+  btnReniciar.addEventListener("click", () => {
+    const mesa = document.querySelector(".grid");
+el.removeChild (mesa);
+    el.appendChild(iniciarJogo());
+    btnReniciar.style.display = 'none';
+  })
   let cartasSelecionadas = [];
   el.addEventListener("click", (event) => {
     // Verifica se o elemento clicado é uma imagem e se menos de duas cartas foram selecionadas
@@ -60,9 +63,17 @@ const App = () => {
         const id1 = cartasSelecionadas[0].getAttribute("data-id");
         const id2 = cartasSelecionadas[1].getAttribute("data-id");
         // Verifica se os 'data-id' das duas cartas são iguais
-
+const finalizarJogo = () => {
+  const desabilitarCartas = document.querySelectorAll(".flip-card");
+  if (desabilitarCartas.length === 12) {
+    alert("Você é um Blink!");
+    btnReniciar.style.display = 'block';
+  }
+}
         if (id1 === id2) {
           cartasSelecionadas = [];
+
+          finalizarJogo();
         } else {
           // remove a classe "flip-card" das cartas
           setTimeout(() => {
@@ -83,7 +94,18 @@ const App = () => {
   return el;
 };
 
-export default App;
+const iniciarJogo = () => {
+  const mesa = document.createElement('div');
 
-// Função de combinar as cartas
-// Função de comparar  valores 
+  mesa.className = 'grid';
+  let listaCartas = data.items.concat(data.items);
+  const cartasEmbaralhadas = listaCartas.sort((a, b) => 0.5 - Math.random())
+ 
+  for (let carta of cartasEmbaralhadas) {
+    mesa.appendChild(Carta(carta));
+
+  }
+return mesa;
+}
+
+export default App;
